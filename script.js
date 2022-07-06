@@ -40,18 +40,22 @@ Promise.all([d3.json("https://chi-loong.github.io/CSC3007/assignments/links-samp
     .append("circle")
     .attr("r", 20)
     .style("fill", d => colorScale(d.gender))
-    .on("mouseover", function(d){
+    .on("mouseover", function (event,d) {
         tooltip.transition()
-        .duration(300)
-        .style("opacity", 1)
+                .duration(100)
+                .style("visibility", "visible")
+                .style("opacity", 1)
+                .style("position", "absolute")
+                .style("background-color","#F8F0E3")
         
-        tooltip.html("ID: " + d.id + " is working as " + d.occupation + " at "+ d.organisation)
-        .style("left",(event.pageX)+"px")
-        .style("top", (event.pageY)+"px");
+        tooltip.html("ID: " + d.id + " is working as " + d.occupation + " at "+ d.organization)
+                .style("left", (event.pageX) + "px")
+                .style("top", (event.pageY) + "px");
     })
-    .on("mouseleave", function (d) {
+    .on("mouseout", function (event,d) {
         tooltip.transition()
-            .duration(300)
+            .duration(100)
+            .style("visibility", "hidden")
             .style("opacity", 0)
     })
     .call(d3.drag()
